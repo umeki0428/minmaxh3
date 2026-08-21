@@ -119,6 +119,22 @@ BGM が無い、または完全無音を明示されたときだけ `N/A`。
 | FL2VA | 2枚の静止説明を繰り返さない。ポーズ・物・光がどう遷移するかを書く |
 | L2VA | 末尾画像は最終ショット。そこへ着地する先行状態と経路を逆算する |
 
+## ループ動画（同一画像の FL2VA）
+
+ComfyUI の FL2VA ループは、1枚の画像を `first_frame` と `last_frame` の両方に渡す。プロンプトは通常の FL2VA と同じ定型だが、**末尾が先頭に戻る周期運動**だけを書く。実例は [examples/loop-fl2va-body-sway.txt](../examples/loop-fl2va-body-sway.txt)。ワークフローは [workflows/minimax_h3_loop_fl2va.json](../workflows/minimax_h3_loop_fl2va.json)。
+
+使う動き: sway / bounce / breathe / pulse / drift。使わない動き: 歩き去る、服を脱ぐ、ドアが開く、カット、ズームジャンプ。
+
+書き方:
+
+1. アライメント1行の `S.SS` を Duration と同じ秒にする（ワークフロー初期値は `5.00`）
+2. `[Shot 1]` のみ。カメラは `static shot`
+3. 経路は **先頭のポーズ → 中間の1周期 → 差分が縮小 → Picture 2（= Picture 1）に着地**
+4. `overall_soundscape` は音量一定。始まりも終わりもフェードしない（音の継ぎ目対策）
+5. 湯気や粒子を足すなら密度を一定にし、最後に同じ見え方へ戻す
+
+Duration を変えたら、プロンプト先頭の `5.00-second` も必ず書き換える。フレーム数は 24fps の 17k+5 グリッドにスナップするため、5秒指定でも実フレームは 124（約 5.17 秒）になることがある。アライメントは Duration ウィジェットの秒に合わせる。
+
 ## Ref2VA（フルリファレンス）
 
 役割未指定の添付ファイルは無視されやすい。先にラベルを定義する。
@@ -175,6 +191,7 @@ non_diegetic_music: A soft acoustic-guitar pattern at a moderate tempo, joined b
 - 台詞を `<d>` の外で英訳する
 - 足音を `non_diegetic_music` に書く、BGM を `overall_soundscape` に書く
 - FL2VA でカットを増やし、2枚の間の経路を書かない
+- ループなのに片道の動作や、音のフェードイン/アウトを書く
 - Ref2VA で添付の役割を定義せず、ラベルを途中から増やす
 - 動画長 8 秒なのに 00:12.000 のカットを書く
 
