@@ -8,7 +8,8 @@ H3 はテキスト・画像・動画・音声をまとめて理解し、映像�
 
 1. [docs/h3-prompt-writing.md](docs/h3-prompt-writing.md) — 日本語の書き方
 2. [`.cursor/skills/h3-prompt-writing/SKILL.md`](.cursor/skills/h3-prompt-writing/SKILL.md) — エージェント用の手順
-3. 公式原文
+3. [examples/loop-fl2va-body-sway.txt](examples/loop-fl2va-body-sway.txt) — 同一画像 FL2VA ループの実例
+4. 公式原文
    - [base-en.txt](.cursor/skills/h3-prompt-writing/references/base-en.txt) — T2VA / I2VA / FL2VA / L2VA
    - [ref-en.txt](.cursor/skills/h3-prompt-writing/references/ref-en.txt) — Ref2VA
 
@@ -19,6 +20,7 @@ H3 はテキスト・画像・動画・音声をまとめて理解し、映像�
 | T2VA | テキストのみ | コア3フィールド |
 | I2VA | 先頭フレーム | アライメント1行 + コア3フィールド |
 | FL2VA | 先頭と末尾 | アライメント1行 + コア3フィールド（原則1ショット） |
+| FL2VA ループ | 同一画像を先頭と末尾 | 上に同じ。往復・周期運動だけ書き、末尾を先頭に戻す |
 | L2VA | 末尾フレーム | アライメント1行 + コア3フィールド |
 | Ref2VA | 役割参照（画像≤9、動画≤3、音声≤3、合計≤12） | 6セクション |
 
