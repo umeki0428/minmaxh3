@@ -1,0 +1,37 @@
+# 生成した動画・音声（成果物はリポジトリに入れない）
+*.mp4
+*.mov
+*.webm
+*.mkv
+*.avi
+*.gif
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.flac
+
+# 生成物・作業用の出力先
+output/
+outputs/
+renders/
+tmp/
+
+# モデル・重み
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+
+# 資格情報
+.env
+.env.*
+!.env.example
+
+# OS / エディタ
+Thumbs.db
+desktop.ini
+.DS_Store
+*.swp
+__pycache__/
+.venv/
