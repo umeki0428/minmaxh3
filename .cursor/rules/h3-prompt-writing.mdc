@@ -1,0 +1,13 @@
+---
+description: MiniMax H3 の動画プロンプトを書くときは公式フィールド構造に従う
+alwaysApply: true
+---
+
+# MiniMax H3 プロンプト
+
+このリポジトリで動画プロンプトを書く・直す・変換するときは、先に `.cursor/skills/h3-prompt-writing/SKILL.md` を読む。
+
+- テキスト / 先頭・末尾フレーム: `.cursor/skills/h3-prompt-writing/references/base-en.txt`
+- 画像・動画・音声の役割参照 (Ref2VA): `.cursor/skills/h3-prompt-writing/references/ref-en.txt`
+
+出力は英語。台詞・歌詞・画面内テキストだけ原文言語を保持する。フィールド名、ショット記法、参照ラベル、時刻記法は公式ガイドの表記を一字一句守る。
