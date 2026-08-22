@@ -34,6 +34,24 @@ non_diegetic_music: ...
 
 本文は英語。台詞・歌詞・画面内テキストだけ原文言語を残します。
 
+## 絵コンテ資料
+
+漫画1ページ（右上始まり）を 10秒の映像用絵コンテに展開した作例を同梱しています。尺 10秒 / 24fps / 16:9 / 7カット。
+
+- 閲覧用：[`storyboard/index.html`](storyboard/index.html)
+- テキスト版：[`storyboard/絵コンテ.md`](storyboard/絵コンテ.md)
+- カット画：[`storyboard/cuts/`](storyboard/cuts/)
+
+## ディレクトリ
+
+| パス | 内容 |
+| --- | --- |
+| `docs/` | 日本語の解説ドキュメント |
+| `examples/` | プロンプトの実例 |
+| `workflows/` | ワークフロー JSON |
+| `storyboard/` | 絵コンテ（HTML / Markdown / カット画） |
+| `.cursor/` | エージェント用スキルとルール |
+
 ## 出典
 
 公式スキルと参照ファイルは [MiniMax-AI/MiniMax-H3](https://github.com/MiniMax-AI/MiniMax-H3/tree/main/skills/h3-prompt-writing) の `skills/h3-prompt-writing` を学習用に配置しています。仕様の正は常に公式リポジトリと [Video Generation](https://platform.minimax.io/docs/guides/video-generation) です。
