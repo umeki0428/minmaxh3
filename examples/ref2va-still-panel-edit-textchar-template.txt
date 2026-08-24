@@ -1,0 +1,19 @@
+subject_definitions:
+<Video 1> is the source for the target video edit: a single illustration or manga panel placed on a plain canvas with blank margins, held as a still for the whole clip, showing one character in a specific pose, camera angle, and framing. Its composition is kept exactly: the body pose, limb and hand positions, head direction, camera angle, and the character's placement and size inside the canvas. Its original character's face, hair, and clothing are not kept, and any monochrome manga rendering, screentone, panel border, speech balloons, and text are not kept.
+<Subject 1> is the new character who replaces the character in <Video 1>, defined by this description only: a young woman with [HAIR], [EYES], wearing [OUTFIT], drawn as a clean full-color anime illustration with clean lines and flat cel shading.
+
+summary:
+[video editing] The target video is an edited version of <Video 1>. The character in <Video 1> is replaced by <Subject 1>: her hair becomes [HAIR], her eyes become [EYES], and her clothing is replaced by [OUTFIT], keeping the exact pose, limb and hand positions, head direction, camera angle, framing, placement, and size of the original character on every frame. The blank margins of the canvas are filled with the same plain background so the whole frame reads as one complete image. The result is rendered as a clean full-color anime illustration with a plain simple background and without screentone, panel borders, speech balloons, or text. The camera is locked and nothing moves.
+
+retention_analysis:
+<Video 1> (whole video): partially_preserved - the composition is kept frame for frame; the original character's face, hair, and clothing are discarded and replaced, and any monochrome rendering, screentone, panel border, balloons, and text are discarded.
+
+detailed_description:
+The target is one still full-color anime illustration held for the whole clip, not a collage, split screen, or sequence.
+[Shot 1] The shot is <Video 1> with a locked camera and the same framing. The character is redrawn as <Subject 1>, occupying exactly the same place and size in the frame and holding exactly the same pose as the original character in <Video 1>: the same body orientation, the same limb and hand positions, and the same head direction. She has [HAIR], [EYES], and wears [OUTFIT]; none of the original character's hair or clothing remain. She is drawn in a clean full-color anime style with clean lines and flat cel shading. The background is plain and simple and extends across the whole canvas, including the former margins. There is no screentone, no panel border, no speech balloon, and no text. Nothing moves from the first frame to the last.
+
+overall_soundscape:
+N/A
+
+non_diegetic_music:
+N/A

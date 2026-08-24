@@ -1,0 +1,1619 @@
+{
+  "id": "3c9d7e11-2a4b-4f6e-8b1d-5e0f7a9c2d44",
+  "revision": 0,
+  "last_node_id": 36,
+  "last_link_id": 42,
+  "nodes": [
+    {
+      "id": 0,
+      "type": "LoadImage",
+      "pos": [
+        520,
+        80
+      ],
+      "size": [
+        400,
+        380
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "image",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "choose file to upload",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            25
+          ]
+        },
+        {
+          "localized_name": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "character.png",
+        "image"
+      ],
+      "title": "① キャラ画像  <Picture 1>"
+    },
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        20,
+        80
+      ],
+      "size": [
+        400,
+        82
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "unet_name",
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "weight_dtype",
+          "name": "weight_dtype",
+          "type": "COMBO",
+          "widget": {
+            "name": "weight_dtype"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            31
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+        "default"
+      ],
+      "title": "UNET: ref2va pruned int8"
+    },
+    {
+      "id": 2,
+      "type": "CLIPLoader",
+      "pos": [
+        20,
+        210
+      ],
+      "size": [
+        400,
+        106
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip_name",
+          "name": "clip_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "type",
+          "name": "type",
+          "type": "COMBO",
+          "widget": {
+            "name": "type"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "device",
+          "name": "device",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "device"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "minimax",
+        "default"
+      ],
+      "title": "Text encoder: qwen3vl nvfp4"
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "pos": [
+        20,
+        360
+      ],
+      "size": [
+        400,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "vae_name",
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            24,
+            38
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "minimax_h3_video_vae_fp16.safetensors"
+      ],
+      "title": "VAE: video vae fp16"
+    },
+    {
+      "id": 4,
+      "type": "H3ImageResolutionPreset",
+      "pos": [
+        520,
+        660
+      ],
+      "size": [
+        400,
+        170
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "source_image",
+          "name": "source_image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 22
+        },
+        {
+          "localized_name": "aspect_ratio",
+          "name": "aspect_ratio",
+          "type": "COMBO",
+          "widget": {
+            "name": "aspect_ratio"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "resolution_profile",
+          "name": "resolution_profile",
+          "type": "COMBO",
+          "widget": {
+            "name": "resolution_profile"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "custom_megapixels",
+          "name": "custom_megapixels",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "custom_megapixels"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "limit_to_native_area",
+          "name": "limit_to_native_area",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "limit_to_native_area"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "links": [
+            27
+          ]
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "links": [
+            28
+          ]
+        },
+        {
+          "localized_name": "resolution_info",
+          "name": "resolution_info",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Image Studio": "v18",
+        "Node name for S&R": "H3ImageResolutionPreset"
+      },
+      "widgets_values": [
+        "source image",
+        "native detail | 0.98 MP",
+        2,
+        true
+      ],
+      "color": "#443066",
+      "bgcolor": "#211635",
+      "title": "③ 出力サイズ（比率は②構図画像と同じ）"
+    },
+    {
+      "id": 5,
+      "type": "H3ReferenceEditPrepare",
+      "pos": [
+        960,
+        660
+      ],
+      "size": [
+        500,
+        560
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 23
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 24
+        },
+        {
+          "localized_name": "source_image",
+          "name": "source_image",
+          "type": "IMAGE",
+          "link": 25
+        },
+        {
+          "localized_name": "reference_image_2",
+          "name": "reference_image_2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 26
+        },
+        {
+          "localized_name": "reference_image_3",
+          "name": "reference_image_3",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "localized_name": "reference_image_4",
+          "name": "reference_image_4",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "localized_name": "reference_image_5",
+          "name": "reference_image_5",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "localized_name": "reference_image_6",
+          "name": "reference_image_6",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "localized_name": "reference_image_7",
+          "name": "reference_image_7",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "localized_name": "reference_image_8",
+          "name": "reference_image_8",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "localized_name": "reference_image_9",
+          "name": "reference_image_9",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "localized_name": "edit_instruction",
+          "name": "edit_instruction",
+          "type": "STRING",
+          "widget": {
+            "name": "edit_instruction"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 27
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 28
+        },
+        {
+          "localized_name": "quality_profile",
+          "name": "quality_profile",
+          "type": "COMBO",
+          "widget": {
+            "name": "quality_profile"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "source_fidelity",
+          "name": "source_fidelity",
+          "type": "FLOAT",
+          "widget": {
+            "name": "source_fidelity"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "source_fit",
+          "name": "source_fit",
+          "type": "COMBO",
+          "widget": {
+            "name": "source_fit"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "reference_detail",
+          "name": "reference_detail",
+          "type": "COMBO",
+          "widget": {
+            "name": "reference_detail"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "optimize_for_still",
+          "name": "optimize_for_still",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "optimize_for_still"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "positive",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            30
+          ]
+        },
+        {
+          "localized_name": "h3_latent",
+          "name": "h3_latent",
+          "type": "LATENT",
+          "links": [
+            36
+          ]
+        },
+        {
+          "localized_name": "fitted_source",
+          "name": "fitted_source",
+          "type": "IMAGE",
+          "links": [
+            40
+          ]
+        },
+        {
+          "localized_name": "requested_frames",
+          "name": "requested_frames",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "localized_name": "image_prompt",
+          "name": "image_prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "localized_name": "run_info",
+          "name": "run_info",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Image Studio": "v18",
+        "Node name for S&R": "H3ReferenceEditPrepare"
+      },
+      "widgets_values": [
+        "subject_definitions:\n<Subject 1> is the character from <Picture 1>. Only her identity is used: face, hairstyle, hair color, eye color, outfit, accessories, colors, and the clean full-color anime art style of <Picture 1>. The pose, framing, camera, and background of <Picture 1> are not used.\n<Picture 2> is the composition anchor for [Shot 1]: a manga panel that defines the camera angle, framing, the character's body pose, limb positions, hand positions, head direction, and placement in the frame. Its monochrome manga rendering, screentone, panel border, speech balloons, and text are not used.\n\nsummary:\n[reference generation] One still image of <Subject 1> posed and framed exactly like the character in <Picture 2>, rendered in full color in the art style of <Picture 1> on a plain simple background. The camera is locked and nothing moves.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1]): partially_preserved - the face, hair, eyes, outfit, colors, and art style of <Picture 1> are retained; its standing pose, framing, and camera are discarded and replaced by those of <Picture 2>.\n<Picture 2> (composition anchor for [Shot 1]): fully_preserved - the camera angle, framing, body pose, limb and hand positions, head direction, and placement in the frame are reproduced; its monochrome rendering, screentone, borders, balloons, and text are not.\n\ndetailed_description:\nThe target is one finished full-color anime illustration, not a collage, split screen, or sequence.\n[Shot 1] A static shot whose composition is taken from <Picture 2>: the same camera angle, the same framing, and the character in the same place and at the same size in the frame as in <Picture 2>. <Subject 1> holds exactly the pose of the character in <Picture 2>, with the same body orientation, the same limb and hand positions, and the same head direction, while keeping her own face, hair, eyes, and outfit from <Picture 1>. She is drawn in the clean full-color anime style of <Picture 1>. The background is plain and simple with no text. Nothing moves for the whole shot.\n\noverall_soundscape:\nN/A\n\nnon_diegetic_music:\nN/A",
+        1344,
+        768,
+        "recommended | 5 frames",
+        0.4,
+        "crop_center",
+        "max_identity_2048",
+        false
+      ],
+      "color": "#24395c",
+      "bgcolor": "#101c31",
+      "title": "④ プロンプトと参照の強さ"
+    },
+    {
+      "id": 6,
+      "type": "RandomNoise",
+      "pos": [
+        960,
+        1360
+      ],
+      "size": [
+        400,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "noise_seed",
+          "name": "noise_seed",
+          "type": "INT",
+          "widget": {
+            "name": "noise_seed"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "NOISE",
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            32
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        1,
+        "randomize"
+      ],
+      "title": "⑥ seed"
+    },
+    {
+      "id": 7,
+      "type": "BasicGuider",
+      "pos": [
+        520,
+        1860
+      ],
+      "size": [
+        400,
+        46
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 29
+        },
+        {
+          "localized_name": "conditioning",
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "GUIDER",
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            33
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "title": "Guider（触らない）"
+    },
+    {
+      "id": 8,
+      "type": "H3ImageSamplingPreset",
+      "pos": [
+        520,
+        1360
+      ],
+      "size": [
+        400,
+        310
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 31
+        },
+        {
+          "localized_name": "sampling_profile",
+          "name": "sampling_profile",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampling_profile"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "custom_sampler",
+          "name": "custom_sampler",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "custom_sampler"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "custom_scheduler",
+          "name": "custom_scheduler",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "custom_scheduler"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "custom_steps",
+          "name": "custom_steps",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "custom_steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "custom_denoise",
+          "name": "custom_denoise",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "custom_denoise"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "custom_shift_video",
+          "name": "custom_shift_video",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "custom_shift_video"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "custom_shift_audio",
+          "name": "custom_shift_audio",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "custom_shift_audio"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "custom_beta_alpha",
+          "name": "custom_beta_alpha",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "custom_beta_alpha"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "custom_beta_beta",
+          "name": "custom_beta_beta",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "custom_beta_beta"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            29
+          ]
+        },
+        {
+          "localized_name": "sampler",
+          "name": "sampler",
+          "type": "SAMPLER",
+          "links": [
+            34
+          ]
+        },
+        {
+          "localized_name": "sigmas",
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "links": [
+            35
+          ]
+        },
+        {
+          "localized_name": "sampling_info",
+          "name": "sampling_info",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Image Studio": "v18",
+        "Node name for S&R": "H3ImageSamplingPreset"
+      },
+      "widgets_values": [
+        "base quality | RES 20 steps",
+        "res_multistep",
+        "simple",
+        20,
+        1,
+        12,
+        3,
+        0.6,
+        0.6
+      ],
+      "color": "#5a3424",
+      "bgcolor": "#2c1810",
+      "title": "⑤ サンプリング設定"
+    },
+    {
+      "id": 10,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        960,
+        1860
+      ],
+      "size": [
+        400,
+        106
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "noise",
+          "name": "noise",
+          "type": "NOISE",
+          "link": 32
+        },
+        {
+          "localized_name": "guider",
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 33
+        },
+        {
+          "localized_name": "sampler",
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 34
+        },
+        {
+          "localized_name": "sigmas",
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 35
+        },
+        {
+          "localized_name": "latent_image",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 36
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "output",
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            37
+          ]
+        },
+        {
+          "localized_name": "denoised_output",
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "title": "Sampler（触らない）"
+    },
+    {
+      "id": 11,
+      "type": "H3ImageDecode",
+      "pos": [
+        1400,
+        1860
+      ],
+      "size": [
+        400,
+        86
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "samples",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 37
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 38
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "frames",
+          "name": "frames",
+          "type": "IMAGE",
+          "links": [
+            39
+          ]
+        },
+        {
+          "localized_name": "decoded_frames",
+          "name": "decoded_frames",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "localized_name": "decode_info",
+          "name": "decode_info",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "localized_name": "recommended_index",
+          "name": "recommended_index",
+          "type": "INT",
+          "links": [
+            41
+          ]
+        }
+      ],
+      "properties": {
+        "Image Studio": "v18",
+        "Node name for S&R": "H3ImageDecode"
+      },
+      "color": "#25534d",
+      "bgcolor": "#102a27",
+      "title": "Decode: 5フレームを画像化（触らない）"
+    },
+    {
+      "id": 12,
+      "type": "H3ImageFrameSelector",
+      "pos": [
+        1840,
+        1860
+      ],
+      "size": [
+        400,
+        306
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "frames",
+          "name": "frames",
+          "type": "IMAGE",
+          "link": 39
+        },
+        {
+          "localized_name": "source_image",
+          "name": "source_image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 40
+        },
+        {
+          "localized_name": "recommended_index",
+          "name": "recommended_index",
+          "shape": 7,
+          "type": "INT",
+          "link": 41
+        },
+        {
+          "localized_name": "strategy",
+          "name": "strategy",
+          "type": "COMBO",
+          "widget": {
+            "name": "strategy"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "manual_index",
+          "name": "manual_index",
+          "type": "INT",
+          "widget": {
+            "name": "manual_index"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "skip_first_frames",
+          "name": "skip_first_frames",
+          "type": "INT",
+          "widget": {
+            "name": "skip_first_frames"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "candidate_start",
+          "name": "candidate_start",
+          "type": "FLOAT",
+          "widget": {
+            "name": "candidate_start"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "candidate_end",
+          "name": "candidate_end",
+          "type": "FLOAT",
+          "widget": {
+            "name": "candidate_end"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "similarity_weight",
+          "name": "similarity_weight",
+          "type": "FLOAT",
+          "widget": {
+            "name": "similarity_weight"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "top_k",
+          "name": "top_k",
+          "type": "INT",
+          "widget": {
+            "name": "top_k"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "emit_candidate_batch",
+          "name": "emit_candidate_batch",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "emit_candidate_batch"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "selected_image",
+          "name": "selected_image",
+          "type": "IMAGE",
+          "links": [
+            42
+          ]
+        },
+        {
+          "localized_name": "candidate_batch_debug",
+          "name": "candidate_batch_debug",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "localized_name": "selected_index",
+          "name": "selected_index",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "localized_name": "selected_score",
+          "name": "selected_score",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "localized_name": "score_report",
+          "name": "score_report",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Image Studio": "v18",
+        "Node name for S&R": "H3ImageFrameSelector"
+      },
+      "widgets_values": [
+        "decode_recommended",
+        0,
+        0,
+        0,
+        1,
+        0.35,
+        4,
+        false
+      ],
+      "color": "#25534d",
+      "bgcolor": "#102a27",
+      "title": "⑦ フレーム選択"
+    },
+    {
+      "id": 13,
+      "type": "SaveImage",
+      "pos": [
+        2280,
+        1860
+      ],
+      "size": [
+        400,
+        320
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 42
+        },
+        {
+          "localized_name": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "MiniMax_H3_Still/composition"
+      ],
+      "title": "⑧ 保存"
+    },
+    {
+      "id": 14,
+      "type": "LoadImage",
+      "pos": [
+        960,
+        80
+      ],
+      "size": [
+        400,
+        380
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "image",
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "choose file to upload",
+          "name": "upload",
+          "type": "IMAGEUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            26,
+            22
+          ]
+        },
+        {
+          "localized_name": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "panel.png",
+        "image"
+      ],
+      "title": "② 構図画像  <Picture 2>（漫画の1コマ）"
+    },
+    {
+      "id": 30,
+      "type": "MarkdownNote",
+      "title": "入力画像の説明",
+      "pos": [
+        1400,
+        80
+      ],
+      "size": [
+        480,
+        380
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## ① ② 入力画像\n\n**① キャラ画像 = `<Picture 1>`**\nここから「顔・髪・服・色・画風」だけを取る。\n**全身立ち絵をそのまま入れない。** 全身があるとモデルはそのポーズごと写してしまう。\n→ **バストアップ（胸から上）に切り抜いた画像**を入れる。服の特徴が下半身にあるなら、顔アップと全身を1枚に並べたシートにする。\n\n**② 構図画像 = `<Picture 2>`**\n再現したい漫画の **1コマだけ** を切り出した画像。ここから「ポーズ・カメラ・構図・配置」を取る。\n- ページ全体を入れない／吹き出し・文字は消す／短辺 768px 以上\n\n**Picture 2 が読めているか確認する方法**\n④のプロンプトを一時的に `Reproduce <Picture 2> exactly as it is, in color.` だけにして Run。\nコマが再現されれば接続は正常（= あとはプロンプトと①の問題）。\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 31,
+      "type": "MarkdownNote",
+      "title": "出力サイズの説明",
+      "pos": [
+        520,
+        860
+      ],
+      "size": [
+        400,
+        360
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## ③ 出力サイズ\n\n**aspect_ratio（比率）**\n- `source image` = **②構図画像と同じ比率**（初期設定）\n- 別の比率にしたいときはプリセットを選ぶ。構図を保ちたいなら②の画像に余白を足して比率を作るほうが確実\n\n**resolution_profile（画質）**\n- `fast preview | 0.40 MP` = 試し用、速い\n- `native detail | 0.98 MP` = 本番\n\nこの2つ以外は触らない。\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 32,
+      "type": "MarkdownNote",
+      "title": "プロンプトと参照の強さの説明",
+      "pos": [
+        1480,
+        660
+      ],
+      "size": [
+        460,
+        560
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## ④ プロンプト\n\n**edit_instruction** には MiniMax 公式の Ref2VA 6セクション形式を入れてある\n（subject_definitions / summary / retention_analysis / detailed_description / overall_soundscape / non_diegetic_music）。\nImage Studio の自動ラッパー（`optimize_for_still`）は **false** にしてあるので、この文がそのままモデルに渡る。\n- `<Picture 1>` = キャラ（identity だけ）、`<Picture 2>` = 構図アンカー。ラベルを変えない\n- コマのポーズを言葉でも書くと当たりやすい:\n  detailed_description の \"holds exactly the pose of the character in <Picture 2>\" の直後に\n  `(sitting on the floor hugging her knees, seen from a low angle, looking up)` のように追記\n- コマの背景も欲しい: \"The background is plain and simple\" →\n  \"The background follows the layout of <Picture 2>, rendered in color\"\n- キャラの特徴を固定したい: subject_definitions の <Subject 1> に髪色・目・服を書き足す\n\n**source_fidelity**: `optimize_for_still` が false のあいだは **効かない**（ラッパー文の強さを決める値なので）。触らなくてよい。\n**optimize_for_still**: false のまま。true にすると「Picture 1 を保て」という文が自動で前置され、構図が効かなくなる。\n\n**quality_profile**: `recommended | 5 frames` のまま\n**reference_detail**: `max_identity_2048` のまま。VRAM 不足なら `match_generation_area`\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 33,
+      "type": "MarkdownNote",
+      "title": "seed の説明",
+      "pos": [
+        960,
+        1480
+      ],
+      "size": [
+        400,
+        190
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## ⑥ seed\n\n`randomize` のままで毎回違う結果になる。\n結果は確率的なので **同じ設定で 3〜4 回** 回して良いものを選ぶ。\n気に入った1枚が出たら、そのときの seed を控えて `fixed` にすると再現できる。\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 34,
+      "type": "MarkdownNote",
+      "title": "サンプリングの説明",
+      "pos": [
+        1400,
+        1360
+      ],
+      "size": [
+        480,
+        310
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## ⑤ サンプリング設定\n\n**sampling_profile**: `base quality | RES 20 steps` のまま。\n- `base speed | 12 steps` … 速いが粗い。試行回数を稼ぐとき\n- Turbo 系は対応 LoRA が必要なので使わない\n\n`custom ...` の各値はプロファイルが `custom` のときだけ効く。普段は無視して良い。\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 35,
+      "type": "MarkdownNote",
+      "title": "フレーム選択と保存の説明",
+      "pos": [
+        1840,
+        2230
+      ],
+      "size": [
+        840,
+        230
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## ⑦ フレーム選択 / ⑧ 保存\n\n**⑦ strategy**: `decode_recommended` のまま（5フレームから自動で1枚選ぶ）。\n別のフレームを見たいときだけ `manual` にして `manual_index`（0〜4）を指定。\n`emit_candidate_batch` を true にすると 5 枚全部を確認用に出せる。\n\n**⑧ filename_prefix**: 保存先は `ComfyUI/output/MiniMax_H3_Still/composition_00001_.png`。\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 36,
+      "type": "MarkdownNote",
+      "title": "README",
+      "pos": [
+        20,
+        480
+      ],
+      "size": [
+        400,
+        1700
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## キャラ画像 + 構図画像 → 静止画（H3 Ref2VA）\n\nMiniMax H3 Image Studio の `H3_REFERENCE_EDIT` を土台に、プロンプトは **MiniMax 公式の Ref2VA 形式**を直接渡す設定\n（`optimize_for_still` = false）。`<Picture 1>` = キャラ、`<Picture 2>` = 構図アンカー。\n\n**使い方**\n1. `① キャラ画像` に **バストアップに切り抜いた**キャラ画像（全身立ち絵はポーズごと写されるので避ける）\n2. `② 構図画像` に再現したい漫画の**1コマ**。吹き出し・文字は消す\n3. 出力の比率は②と同じ（変えない）\n4. Run。5フレーム生成して最良の1枚を保存（`output/MiniMax_H3_Still/`）\n5. seed を変えて 3〜4 回回して比べる\n\n**うまくいかないとき（順番に）**\n1. ④のプロンプトを `Reproduce <Picture 2> exactly as it is, in color.` だけにして Run → コマが出なければ②の接続・画像の問題\n2. ①を顔アップだけにする\n3. detailed_description にコマのポーズを言葉で追記\n4. `resolution_profile` を 0.98 MP に（0.40 は構図の読み取りも粗くなる）\n\n**注意**\n- Image Studio の `optimize_for_still` = true は「Picture 1 を保て」という文を自動で前置する。構図転写では false にしてある\n- この方式で構図が効かない場合は、核ノード版 `minimax_h3_still_panel_edit_ref2va.json`（コマを <Video 1> として人物差し替え）を試す\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      22,
+      14,
+      0,
+      4,
+      0,
+      "IMAGE"
+    ],
+    [
+      23,
+      2,
+      0,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      24,
+      3,
+      0,
+      5,
+      1,
+      "VAE"
+    ],
+    [
+      25,
+      0,
+      0,
+      5,
+      2,
+      "IMAGE"
+    ],
+    [
+      26,
+      14,
+      0,
+      5,
+      3,
+      "IMAGE"
+    ],
+    [
+      27,
+      4,
+      0,
+      5,
+      12,
+      "INT"
+    ],
+    [
+      28,
+      4,
+      1,
+      5,
+      13,
+      "INT"
+    ],
+    [
+      29,
+      8,
+      0,
+      7,
+      0,
+      "MODEL"
+    ],
+    [
+      30,
+      5,
+      0,
+      7,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      31,
+      1,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      32,
+      6,
+      0,
+      10,
+      0,
+      "NOISE"
+    ],
+    [
+      33,
+      7,
+      0,
+      10,
+      1,
+      "GUIDER"
+    ],
+    [
+      34,
+      8,
+      1,
+      10,
+      2,
+      "SAMPLER"
+    ],
+    [
+      35,
+      8,
+      2,
+      10,
+      3,
+      "SIGMAS"
+    ],
+    [
+      36,
+      5,
+      1,
+      10,
+      4,
+      "LATENT"
+    ],
+    [
+      37,
+      10,
+      0,
+      11,
+      0,
+      "LATENT"
+    ],
+    [
+      38,
+      3,
+      0,
+      11,
+      1,
+      "VAE"
+    ],
+    [
+      39,
+      11,
+      0,
+      12,
+      0,
+      "IMAGE"
+    ],
+    [
+      40,
+      5,
+      2,
+      12,
+      1,
+      "IMAGE"
+    ],
+    [
+      41,
+      11,
+      3,
+      12,
+      2,
+      "INT"
+    ],
+    [
+      42,
+      12,
+      0,
+      13,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "モデル（変更不要）",
+      "bounding": [
+        0,
+        0,
+        440,
+        460
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "1. 入力画像",
+      "bounding": [
+        500,
+        0,
+        1400,
+        500
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "2. 設定（ここを触る）",
+      "bounding": [
+        500,
+        580,
+        1460,
+        680
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "3. サンプリング",
+      "bounding": [
+        500,
+        1280,
+        1400,
+        420
+      ],
+      "color": "#a1309b",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "4. 生成と出力（基本は触らない）",
+      "bounding": [
+        500,
+        1780,
+        2200,
+        720
+      ],
+      "color": "#444",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.45,
+      "offset": [
+        60,
+        40
+      ]
+    },
+    "image_studio": {
+      "release": "v21.0.0",
+      "source_api": "examples/api/H3_REFERENCE_EDIT_API.json"
+    }
+  },
+  "version": 0.4
+}

@@ -1,0 +1,20 @@
+subject_definitions:
+<Video 1> is the source for the target video edit: a single illustration or manga panel held as a still for the whole clip, showing one character in a specific pose, camera angle, and framing. Its composition is kept exactly: the body pose, limb and hand positions, head direction, camera angle, framing, and the character's placement and size in the frame. Its original character's face, hair, and clothing are not kept, and any monochrome manga rendering, screentone, panel border, speech balloons, and text are not kept.
+<Subject 1> is the character that replaces the character in <Video 1>, taken from <Picture 1>: a young woman with [HAIR], [EYES], wearing [OUTFIT], drawn in the clean full-color anime style of <Picture 1>. Only the design is taken from <Picture 1>; its pose, framing, and background are not used.
+
+summary:
+[video editing] The target video is an edited version of <Video 1>. The character in <Video 1> is replaced by <Subject 1>: her hair becomes [HAIR], her eyes become [EYES], and her clothing is replaced by [OUTFIT] as in <Picture 1>, keeping the exact pose, limb and hand positions, head direction, camera angle, framing, placement, and size of the original character on every frame. The result is rendered in full color in the anime style of <Picture 1>, with a plain simple background and without screentone, panel borders, speech balloons, or text. The camera is locked and nothing moves.
+
+retention_analysis:
+<Video 1> (whole video): partially_preserved - the composition is kept frame for frame; the original character's face, hair, and clothing are discarded and replaced, and any monochrome rendering, screentone, panel border, balloons, and text are discarded.
+<Subject 1> (appears in [Shot 1]): fully_preserved - the hair, eyes, clothing, colors, and art style of <Picture 1> are used for the character.
+
+detailed_description:
+The target is one still full-color anime illustration held for the whole clip, not a collage, split screen, or sequence.
+[Shot 1] The shot is <Video 1> with a locked camera and the same framing. The character is redrawn as <Subject 1>, occupying exactly the same place and size in the frame and holding exactly the same pose as the original character in <Video 1>: the same body orientation, the same limb and hand positions, and the same head direction. She has [HAIR], [EYES], and wears [OUTFIT], as in <Picture 1>, and none of the original character's hair or clothing remain. She is drawn in the clean full-color anime style of <Picture 1> with clean lines and flat cel shading. The background is plain and simple. There is no screentone, no panel border, no speech balloon, and no text. Nothing moves from the first frame to the last.
+
+overall_soundscape:
+N/A
+
+non_diegetic_music:
+N/A

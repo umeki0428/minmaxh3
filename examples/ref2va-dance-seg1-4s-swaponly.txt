@@ -1,0 +1,19 @@
+subject_definitions:
+<Video 1> is the source video for the target video edit: a 4-second hand-drawn 2D animation of one girl facing the camera, framed from mid-thigh up, performing a fast open-hands-and-clap dance on a red background with white handwritten lyric text and small sparkle marks.
+<Subject 1> is the character that replaces the girl in <Video 1>, taken from <Picture 1>: a straight dark-burgundy bob with blunt bangs and a small folded bun at the back of the head, red eyes, small gold hoop earrings, a thin black choker, a black leather biker jacket worn open with silver studs and zippers, a fitted white mini dress with a black belt at the waist, and sheer dark tights.
+
+summary:
+[video editing] The target video is an edited version of <Video 1>. The girl in <Video 1> is replaced by <Subject 1>. Everything else in <Video 1> remains exactly as it is: the red background, the lyric text, the sparkle marks, the framing, the drawing style, the expression, the poses, and the timing.
+
+retention_analysis:
+<Video 1> (whole video): partially_preserved - the background, text, sparkle marks, framing, drawing style, camera, every pose, and the timing of every movement are kept frame for frame; only the girl's identity is discarded and replaced.
+<Subject 1> (appears in [Shot 1]): fully_preserved - the hairstyle, red eyes, earrings, choker, open black leather jacket, white dress, belt, and tights are retained, drawn in the style of <Video 1>.
+
+detailed_description:
+[Shot 1] <Video 1> from its first frame to its last frame, with the girl redrawn as <Subject 1> in the same place, size, and proportions, performing the same poses at the same timing. Nothing else is changed.
+
+overall_soundscape:
+A clean, even room tone continues at a constant level from the first frame to the last, with a light, soft hand-clap on every clap.
+
+non_diegetic_music:
+A bright pop track at about 150 BPM with a steady four-on-the-floor kick, a crisp hi-hat pattern, staccato synth chords, and a light piano melody, held at a constant level from the first frame to the last.

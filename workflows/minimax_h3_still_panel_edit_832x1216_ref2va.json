@@ -1,0 +1,1594 @@
+{
+  "id": "c1d2e3f4-5a6b-4c7d-8e9f-0a1b2c3d4e5f",
+  "revision": 0,
+  "last_node_id": 232,
+  "last_link_id": 309,
+  "nodes": [
+    {
+      "id": 119,
+      "type": "VAELoader",
+      "pos": [
+        20,
+        360
+      ],
+      "size": [
+        400,
+        70
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            251,
+            273
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "VAELoader",
+        "models": [
+          {
+            "name": "minimax_h3_video_vae_fp16.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_video_vae_fp16.safetensors",
+            "directory": "vae"
+          }
+        ]
+      },
+      "widgets_values": [
+        "minimax_h3_video_vae_fp16.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+      },
+      "title": "VAE: video"
+    },
+    {
+      "id": 120,
+      "type": "VAELoader",
+      "pos": [
+        20,
+        470
+      ],
+      "size": [
+        400,
+        70
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            274
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "VAELoader",
+        "models": [
+          {
+            "name": "minimax_h3_audio_vae_fp32.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/vae/minimax_h3_audio_vae_fp32.safetensors",
+            "directory": "vae"
+          }
+        ]
+      },
+      "widgets_values": [
+        "minimax_h3_audio_vae_fp32.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+      },
+      "title": "VAE: audio（参照ノードが要求するだけ）"
+    },
+    {
+      "id": 122,
+      "type": "VAEDecode",
+      "pos": [
+        1400,
+        1780
+      ],
+      "size": [
+        400,
+        60
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 280
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 251
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            309
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 123,
+      "type": "KSamplerSelect",
+      "pos": [
+        520,
+        1420
+      ],
+      "size": [
+        400,
+        70
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            255
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "res_multistep"
+      ],
+      "widgets_values_named": {
+        "sampler_name": "res_multistep"
+      }
+    },
+    {
+      "id": 124,
+      "type": "BasicScheduler",
+      "pos": [
+        520,
+        1540
+      ],
+      "size": [
+        400,
+        130
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 252
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": 308
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            256
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "beta",
+        20,
+        1
+      ],
+      "widgets_values_named": {
+        "scheduler": "simple",
+        "steps": 20,
+        "denoise": 1
+      },
+      "title": "④ Scheduler (beta)"
+    },
+    {
+      "id": 125,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        960,
+        1780
+      ],
+      "size": [
+        400,
+        140
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 253
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 254
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 255
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 256
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 271
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            280
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "SamplerCustomAdvanced"
+      }
+    },
+    {
+      "id": 126,
+      "type": "BasicGuider",
+      "pos": [
+        520,
+        1780
+      ],
+      "size": [
+        400,
+        60
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 307
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 270
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            254
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "BasicGuider"
+      }
+    },
+    {
+      "id": 127,
+      "type": "UNETLoader",
+      "pos": [
+        20,
+        80
+      ],
+      "size": [
+        400,
+        90
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            252,
+            307
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "UNETLoader",
+        "models": [
+          {
+            "name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+            "directory": "diffusion_models"
+          }
+        ]
+      },
+      "widgets_values": [
+        "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      },
+      "title": "UNET: ref2va pruned int8"
+    },
+    {
+      "id": 128,
+      "type": "CLIPLoader",
+      "pos": [
+        20,
+        210
+      ],
+      "size": [
+        400,
+        120
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            272
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "CLIPLoader",
+        "models": [
+          {
+            "name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/MiniMax-H3/resolve/main/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+            "directory": "text_encoders"
+          }
+        ]
+      },
+      "widgets_values": [
+        "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "minimax",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "type": "minimax",
+        "device": "default"
+      },
+      "title": "Text encoder: qwen3vl nvfp4"
+    },
+    {
+      "id": 129,
+      "type": "RandomNoise",
+      "pos": [
+        960,
+        1540
+      ],
+      "size": [
+        400,
+        90
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            253
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        261662374822964,
+        "randomize"
+      ],
+      "widgets_values_named": {
+        "noise_seed": 261662374822964,
+        "control_after_generate": "randomize"
+      },
+      "title": "⑤ seed"
+    },
+    {
+      "id": 136,
+      "type": "MiniMaxH3ReferenceToVideo",
+      "pos": [
+        1400,
+        860
+      ],
+      "size": [
+        440,
+        480
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 272
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 273
+        },
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 274
+        },
+        {
+          "label": "ref_image_0",
+          "name": "ref_images.ref_image_0",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 278
+        },
+        {
+          "label": "ref_image_1",
+          "name": "ref_images.ref_image_1",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "label": "ref_image_2",
+          "name": "ref_images.ref_image_2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "label": "ref_video_0",
+          "name": "ref_videos.ref_video_0",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 296
+        },
+        {
+          "label": "ref_video_audio_0",
+          "name": "ref_video_audios.ref_video_audio_0",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "label": "ref_audio_0",
+          "name": "ref_audios.ref_audio_0",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 279
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 304
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 305
+        },
+        {
+          "name": "length",
+          "type": "INT",
+          "widget": {
+            "name": "length"
+          },
+          "link": 306
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            270
+          ]
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            271
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+      },
+      "widgets_values": [
+        "",
+        1344,
+        768,
+        5,
+        "max"
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "width": 1344,
+        "height": 768,
+        "length": 124,
+        "ref_image_size": "match"
+      },
+      "title": "MiniMax H3 Reference to Video  (<Picture 1> = キャラ, <Video 1> = 構図)"
+    },
+    {
+      "id": 137,
+      "type": "LoadImage",
+      "pos": [
+        520,
+        80
+      ],
+      "size": [
+        400,
+        380
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            278
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "character.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "red_superboy_on_city_roof.png",
+        "upload": "image"
+      },
+      "title": "⓪ キャラ画像  <Picture 1>"
+    },
+    {
+      "id": 138,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        520,
+        860
+      ],
+      "size": [
+        840,
+        480
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            279
+          ]
+        }
+      ],
+      "title": "④ プロンプト（<Picture 1> 参照 + [HAIR][EYES][OUTFIT] 置換済み）",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "subject_definitions:\n<Video 1> is the source for the target video edit: a single illustration or manga panel placed on a plain canvas with blank margins, held as a still for the whole clip, showing one character in a specific pose, camera angle, and framing. Its composition is kept exactly: the body pose, limb and hand positions, head direction, camera angle, and the character's placement and size inside the canvas. Its original character's face, hair, and clothing are not kept, and any monochrome manga rendering, screentone, panel border, speech balloons, and text are not kept.\n<Subject 1> is the character that replaces the character in <Video 1>, taken from <Picture 1>: a young woman with very long straight black hair in a high ponytail with blunt bangs and a thin black halo ring floating above her head, red eyes and a calm expression, wearing a skintight black-and-white bodysuit with red lines and a red front zipper, black gloves, and black boots, drawn in the clean full-color anime style of <Picture 1>. Only the design is taken from <Picture 1>; its pose, framing, and background are not used.\n\nsummary:\n[video editing] The target video is an edited version of <Video 1>. The character in <Video 1> is replaced by <Subject 1>: her hair becomes very long straight black hair in a high ponytail with blunt bangs and a thin black halo ring floating above her head, her eyes become red eyes and a calm expression, and her clothing is replaced by a skintight black-and-white bodysuit with red lines and a red front zipper, black gloves, and black boots as in <Picture 1>, keeping the exact pose, limb and hand positions, head direction, camera angle, framing, placement, and size of the original character on every frame. The blank margins of the canvas are filled with the same plain background so the whole frame reads as one complete image. The result is rendered in full color in the anime style of <Picture 1>, with a plain simple background and without screentone, panel borders, speech balloons, or text. The camera is locked and nothing moves.\n\nretention_analysis:\n<Video 1> (whole video): partially_preserved - the composition is kept frame for frame; the original character's face, hair, and clothing are discarded and replaced, and any monochrome rendering, screentone, panel border, balloons, and text are discarded.\n<Subject 1> (appears in [Shot 1]): fully_preserved - the hair, eyes, clothing, colors, and art style of <Picture 1> are used for the character.\n\ndetailed_description:\nThe target is one still full-color anime illustration held for the whole clip, not a collage, split screen, or sequence.\n[Shot 1] The shot is <Video 1> with a locked camera and the same framing. The character is redrawn as <Subject 1>, occupying exactly the same place and size in the frame and holding exactly the same pose as the original character in <Video 1>: the same body orientation, the same limb and hand positions, and the same head direction. She has very long straight black hair in a high ponytail with blunt bangs and a thin black halo ring floating above her head, red eyes and a calm expression, and wears a skintight black-and-white bodysuit with red lines and a red front zipper, black gloves, and black boots, as in <Picture 1>, and none of the original character's hair or clothing remain. She is drawn in the clean full-color anime style of <Picture 1> with clean lines and flat cel shading. The background is plain and simple and extends across the whole canvas, including the former margins. There is no screentone, no panel border, no speech balloon, and no text. Nothing moves from the first frame to the last.\n\noverall_soundscape:\nN/A\n\nnon_diegetic_music:\nN/A"
+      ],
+      "widgets_values_named": {
+        "value": "Bold comic-book ink style, heavy linework, red and blue-black palette, night city. Use <Picture 2> and <Picture 1> as reference frames and <Audio 1> exactly as it is.\nCUT 1: top-down view of the little boy superhero on the rooftop — red cape fluttering in the wind, hands planted on his hips, freckles and a cocky grin as he looks straight up into the camera. The camera slowly descends toward him as he delivers his line — as he speaks, comic-book graphic overlay text word by word in sync with his voice: \"GET READY TO\" - \"MEET\" — \"YOUR\" — \"MAKER\" — huge jagged comic lettering, white with heavy black outlines and red drop shadows, tilted at scrappy angles, until the three words hang stacked in the air above him between his face and the lens.\nTRANSITION: a violent WHIP PAN off the rooftop that SMEARS the floating words away with it, motion-streaked —\nCUT 2: low hero angle on the colossal black mech-kaiju towering over the skyline as it rears back and unleashes a GIANT terrifying ROAR — jaws wide with fangs, red eyes and chest-core flaring blinding bright, blue lightning arcing off its head, the roar's shockwave rippling dust and rattling windows down the buildings, comic-style speed-lines and ink splatter bursting from the impact of the sound. It leans INTO the camera as the roar peaks. Hold on the roar."
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 143,
+      "type": "PrimitiveInt",
+      "pos": [
+        960,
+        1420
+      ],
+      "size": [
+        400,
+        90
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            308
+          ]
+        }
+      ],
+      "title": "④ Steps",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.0",
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        25,
+        "fixed"
+      ],
+      "widgets_values_named": {
+        "value": 20,
+        "fixed": "fixed"
+      }
+    },
+    {
+      "id": 200,
+      "type": "LoadImage",
+      "pos": [
+        960,
+        80
+      ],
+      "size": [
+        400,
+        380
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            292
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "panel.png",
+        "image"
+      ],
+      "title": "① 構図画像  <Video 1> になる"
+    },
+    {
+      "id": 201,
+      "type": "RepeatImageBatch",
+      "pos": [
+        520,
+        540
+      ],
+      "size": [
+        400,
+        60
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 295
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            296
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RepeatImageBatch"
+      },
+      "widgets_values": [
+        5
+      ],
+      "title": "構図画像を5フレームの静止動画にする（触らない）"
+    },
+    {
+      "id": 203,
+      "type": "GetImageSize",
+      "pos": [
+        520,
+        640
+      ],
+      "size": [
+        400,
+        90
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 297
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            298,
+            301
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            299,
+            302
+          ]
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GetImageSize"
+      },
+      "widgets_values": [],
+      "title": "余白付き画像のサイズ取得（触らない）"
+    },
+    {
+      "id": 204,
+      "type": "ComfyMathExpression",
+      "pos": [
+        1400,
+        480
+      ],
+      "size": [
+        400,
+        120
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 298
+        },
+        {
+          "name": "values.b",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 299
+        },
+        {
+          "name": "values.c",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 300
+        },
+        {
+          "name": "values.d",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": []
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            304
+          ]
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ComfyMathExpression",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        "floor(a * min(1, sqrt(1032192 * c / (a * b))) / 32) * 32"
+      ],
+      "title": "出力幅（③の比率、触らない）"
+    },
+    {
+      "id": 205,
+      "type": "ComfyMathExpression",
+      "pos": [
+        1400,
+        640
+      ],
+      "size": [
+        400,
+        120
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 301
+        },
+        {
+          "name": "values.b",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 302
+        },
+        {
+          "name": "values.c",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 303
+        },
+        {
+          "name": "values.d",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": []
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            305
+          ]
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ComfyMathExpression",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        "floor(b * min(1, sqrt(1032192 * c / (a * b))) / 32) * 32"
+      ],
+      "title": "出力高さ（③の比率、触らない）"
+    },
+    {
+      "id": 206,
+      "type": "PrimitiveInt",
+      "pos": [
+        960,
+        660
+      ],
+      "size": [
+        400,
+        60
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            306
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        5,
+        "fixed"
+      ],
+      "title": "フレーム数 = 5（触らない）"
+    },
+    {
+      "id": 207,
+      "type": "PrimitiveFloat",
+      "pos": [
+        960,
+        540
+      ],
+      "size": [
+        400,
+        60
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            300,
+            303
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveFloat"
+      },
+      "widgets_values": [
+        1.0
+      ],
+      "title": "② 画質 Megapixels（1.0 でちょうど 832x1216）"
+    },
+    {
+      "id": 210,
+      "type": "SaveImage",
+      "pos": [
+        1860,
+        1780
+      ],
+      "size": [
+        400,
+        320
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 309
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "MiniMax_H3_Still/panel_edit_832x1216"
+      ],
+      "title": "⑥ 保存（5フレーム）"
+    },
+    {
+      "id": 220,
+      "type": "MarkdownNote",
+      "title": "使い方",
+      "pos": [
+        1860,
+        80
+      ],
+      "size": [
+        480,
+        660
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## キャラ画像あり・832×1216 版\n\n確定版（`still_panel_edit`）に「構図画像を 832×1216 の比率に余白付きで配置する」段を足したもの。\nキャラ参照なし版（`textchar`）との違いは ⓪ キャラ画像ノードとプロンプトの <Picture 1> 参照だけ。\n\n**使い方**\n1. `⓪ キャラ画像` にキャラ画像（= <Picture 1>）\n2. `① 構図画像` に再現したいポーズの画像（吹き出し・文字は消す）\n   → ③-a/③-b の比率（832×1216）のキャンバスに白余白付きで自動配置される\n3. `② Megapixels` 1.0 で出力はちょうど 832×1216（0.4 なら同比率で縮小）\n4. `④ プロンプト` の [HAIR] [EYES] [OUTFIT] は今回のキャラで置換済み。別キャラは\n   `examples/ref2va-still-panel-edit-template.txt` を置換して貼る\n5. Run → `output/MiniMax_H3_Still/panel_edit_832x1216_*.png`（5枚）\n\n**注意**\n以前、余白付き入力＋キャラ画像ありでキャラ丸写しが起きた（ただし同時に汎用プロンプトにも変えていた）。\nここではキャラ明記プロンプトのまま余白だけ足している。丸写しになれば「余白入力×キャラ画像」の組合せが原因と確定。\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 222,
+      "type": "MarkdownNote",
+      "title": "プロンプトの説明",
+      "pos": [
+        1860,
+        860
+      ],
+      "size": [
+        520,
+        480
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## ④ プロンプト\n\n確定版と同じ: <Video 1> を [video editing] で編集し、人物を <Subject 1>（<Picture 1> のキャラ）に差し替える。\n追加した文: 「キャンバスの余白は同じ無地の背景で埋める」。\n\nキャラを変えるときは [HAIR] [EYES] [OUTFIT] の 3 語句を置換（各 3 か所）。\nテンプレート: `examples/ref2va-still-panel-edit-template.txt`（余白の文は手で足す）。\n\n構図画像の背景も欲しい: \"The background is plain and simple and extends across the whole canvas\" →\n\"The background of <Video 1> is kept and extended across the whole canvas, rendered in color\"\n\nラベル <Picture 1> <Video 1> は接続順で決まる。変えない。\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 230,
+      "type": "ResizeAndPadImage",
+      "pos": [
+        1400,
+        80
+      ],
+      "size": [
+        400,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 292
+        },
+        {
+          "name": "target_width",
+          "type": "INT",
+          "link": 293,
+          "widget": {
+            "name": "target_width"
+          }
+        },
+        {
+          "name": "target_height",
+          "type": "INT",
+          "link": 294,
+          "widget": {
+            "name": "target_height"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            295,
+            297
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ResizeAndPadImage"
+      },
+      "widgets_values": [
+        832,
+        1216,
+        "white",
+        "area"
+      ],
+      "title": "構図画像を ③ の比率に余白付きで配置（触らない）"
+    },
+    {
+      "id": 231,
+      "type": "PrimitiveInt",
+      "pos": [
+        1400,
+        260
+      ],
+      "size": [
+        400,
+        60
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            293
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        832,
+        "fixed"
+      ],
+      "title": "③-a 出力の幅"
+    },
+    {
+      "id": 232,
+      "type": "PrimitiveInt",
+      "pos": [
+        1400,
+        360
+      ],
+      "size": [
+        400,
+        60
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            294
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveInt"
+      },
+      "widgets_values": [
+        1216,
+        "fixed"
+      ],
+      "title": "③-b 出力の高さ"
+    }
+  ],
+  "links": [
+    [
+      251,
+      119,
+      0,
+      122,
+      1,
+      "VAE"
+    ],
+    [
+      252,
+      127,
+      0,
+      124,
+      0,
+      "MODEL"
+    ],
+    [
+      253,
+      129,
+      0,
+      125,
+      0,
+      "NOISE"
+    ],
+    [
+      254,
+      126,
+      0,
+      125,
+      1,
+      "GUIDER"
+    ],
+    [
+      255,
+      123,
+      0,
+      125,
+      2,
+      "SAMPLER"
+    ],
+    [
+      256,
+      124,
+      0,
+      125,
+      3,
+      "SIGMAS"
+    ],
+    [
+      270,
+      136,
+      0,
+      126,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      271,
+      136,
+      1,
+      125,
+      4,
+      "LATENT"
+    ],
+    [
+      272,
+      128,
+      0,
+      136,
+      0,
+      "CLIP"
+    ],
+    [
+      273,
+      119,
+      0,
+      136,
+      1,
+      "VAE"
+    ],
+    [
+      274,
+      120,
+      0,
+      136,
+      2,
+      "VAE"
+    ],
+    [
+      278,
+      137,
+      0,
+      136,
+      3,
+      "IMAGE"
+    ],
+    [
+      279,
+      138,
+      0,
+      136,
+      9,
+      "STRING"
+    ],
+    [
+      280,
+      125,
+      0,
+      122,
+      0,
+      "LATENT"
+    ],
+    [
+      292,
+      200,
+      0,
+      230,
+      0,
+      "IMAGE"
+    ],
+    [
+      293,
+      231,
+      0,
+      230,
+      1,
+      "INT"
+    ],
+    [
+      294,
+      232,
+      0,
+      230,
+      2,
+      "INT"
+    ],
+    [
+      295,
+      230,
+      0,
+      201,
+      0,
+      "IMAGE"
+    ],
+    [
+      296,
+      201,
+      0,
+      136,
+      6,
+      "IMAGE"
+    ],
+    [
+      297,
+      230,
+      0,
+      203,
+      0,
+      "IMAGE"
+    ],
+    [
+      298,
+      203,
+      0,
+      204,
+      0,
+      "INT"
+    ],
+    [
+      299,
+      203,
+      1,
+      204,
+      1,
+      "INT"
+    ],
+    [
+      300,
+      207,
+      0,
+      204,
+      2,
+      "FLOAT"
+    ],
+    [
+      301,
+      203,
+      0,
+      205,
+      0,
+      "INT"
+    ],
+    [
+      302,
+      203,
+      1,
+      205,
+      1,
+      "INT"
+    ],
+    [
+      303,
+      207,
+      0,
+      205,
+      2,
+      "FLOAT"
+    ],
+    [
+      304,
+      204,
+      1,
+      136,
+      10,
+      "INT"
+    ],
+    [
+      305,
+      205,
+      1,
+      136,
+      11,
+      "INT"
+    ],
+    [
+      306,
+      206,
+      0,
+      136,
+      12,
+      "INT"
+    ],
+    [
+      307,
+      127,
+      0,
+      126,
+      0,
+      "MODEL"
+    ],
+    [
+      308,
+      143,
+      0,
+      124,
+      1,
+      "INT"
+    ],
+    [
+      309,
+      122,
+      0,
+      210,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "モデル（変更不要）",
+      "bounding": [
+        0,
+        0,
+        460,
+        600
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "1. 入力画像・出力比率・画質",
+      "bounding": [
+        500,
+        0,
+        1900,
+        800
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "2. プロンプトと参照（ここを触る）",
+      "bounding": [
+        500,
+        800,
+        1900,
+        560
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "3. サンプリング",
+      "bounding": [
+        500,
+        1380,
+        1400,
+        340
+      ],
+      "color": "#a1309b",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "4. 生成と保存",
+      "bounding": [
+        500,
+        1740,
+        1800,
+        420
+      ],
+      "color": "#444",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.45,
+      "offset": [
+        60,
+        40
+      ]
+    },
+    "frontendVersion": "1.49.6",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
